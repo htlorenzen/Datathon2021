@@ -46,58 +46,55 @@ m_4_3 <- prophet(df_4_3, seasonality.mode = 'multiplicative')
 m_4_4 <- prophet(df_4_4, seasonality.mode = 'multiplicative')
 
 future_1_1 <- make_future_dataframe(m_1_1, periods = 7)
-fcst_1_1 <- predict(m_1_1, future_1_1)
-
 future_1_2 <- make_future_dataframe(m_1_2, periods = 7)
-fcst_1_2 <- predict(m_1_2, future_1_2)
-
 future_1_3 <- make_future_dataframe(m_1_3, periods = 7)
-fcst_1_3 <- predict(m_1_3, future_1_3)
-
 future_1_4 <- make_future_dataframe(m_1_4, periods = 7)
-fcst_1_4 <- predict(m_1_4, future_1_4)
-
 future_2_1 <- make_future_dataframe(m_2_1, periods = 7)
-fcst_2_1 <- predict(m_2_1, future_2_1)
-
 future_2_2 <- make_future_dataframe(m_2_2, periods = 7)
-fcst_2_2 <- predict(m_2_2, future_2_2)
-
 future_2_3 <- make_future_dataframe(m_2_3, periods = 7)
-fcst_2_3 <- predict(m_2_3, future_2_3)
-
 future_2_4 <- make_future_dataframe(m_2_4, periods = 7)
-fcst_2_4 <- predict(m_2_4, future_2_4)
-
 future_3_1 <- make_future_dataframe(m_3_1, periods = 7)
-fcst_3_1 <- predict(m_3_1, future_3_1)
-
 future_3_2 <- make_future_dataframe(m_3_2, periods = 7)
-fcst_3_2 <- predict(m_3_2, future_3_2)
-
 future_3_3 <- make_future_dataframe(m_3_3, periods = 7)
-fcst_3_3 <- predict(m_3_3, future_3_3)
-
 future_3_4 <- make_future_dataframe(m_3_4, periods = 7)
-fcst_3_4 <- predict(m_3_4, future_3_4)
-
 future_4_1 <- make_future_dataframe(m_4_1, periods = 7)
-fcst_4_1 <- predict(m_4_1, future_4_1)
-
 future_4_2 <- make_future_dataframe(m_4_2, periods = 7)
-fcst_4_2 <- predict(m_4_2, future_4_2)
-
 future_4_3 <- make_future_dataframe(m_4_3, periods = 7)
-fcst_4_3 <- predict(m_4_3, future_4_3)
-
 future_4_4 <- make_future_dataframe(m_4_4, periods = 7)
+
+
+fcst_1_1 <- predict(m_1_1, future_1_1)
+fcst_1_2 <- predict(m_1_2, future_1_2)
+fcst_1_3 <- predict(m_1_3, future_1_3)
+fcst_1_4 <- predict(m_1_4, future_1_4)
+fcst_2_1 <- predict(m_2_1, future_2_1)
+fcst_2_2 <- predict(m_2_2, future_2_2)
+fcst_2_3 <- predict(m_2_3, future_2_3)
+fcst_2_4 <- predict(m_2_4, future_2_4)
+fcst_3_1 <- predict(m_3_1, future_3_1)
+fcst_3_2 <- predict(m_3_2, future_3_2)
+fcst_3_3 <- predict(m_3_3, future_3_3)
+fcst_3_4 <- predict(m_3_4, future_3_4)
+fcst_4_1 <- predict(m_4_1, future_4_1)
+fcst_4_2 <- predict(m_4_2, future_4_2)
+fcst_4_3 <- predict(m_4_3, future_4_3)
 fcst_4_4 <- predict(m_4_4, future_4_4)
 
 fcst_1 <- rbind(fcst_1_1, fcst_1_2, fcst_1_3, fcst_1_4)
 fcst_1 <- fcst_1[order(fcst_1$ds),]
+fcst_1$ypredict <- ceiling(fcst_1$yhat)
+
 fcst_2 <- rbind(fcst_2_1, fcst_2_2, fcst_2_3, fcst_2_4)
 fcst_2 <- fcst_2[order(fcst_2$ds),]
+fcst_2$ypredict <- ceiling(fcst_2$yhat)
+
 fcst_3 <- rbind(fcst_3_1, fcst_3_2, fcst_3_3, fcst_3_4)
 fcst_3 <- fcst_3[order(fcst_3$ds),]
+fcst_3$ypredict <- ceiling(fcst_3$yhat)
+
 fcst_4 <- rbind(fcst_4_1, fcst_4_2, fcst_4_3, fcst_4_4)
 fcst_4 <- fcst_4[order(fcst_4$ds),]
+fcst_4$ypredict <- ceiling(fcst_4$yhat)
+
+plot(m_1_3,fcst_1_3, main="Store 1: Time Bucket 3 Sales", xlab = "Day of the Year", ylab = 'Gross Hotdog Sales', frame.plot = TRUE)
+prophet_plot_components(m_1_3, fcst_1_3)
