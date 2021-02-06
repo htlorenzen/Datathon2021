@@ -11,7 +11,6 @@ library(prophet)
 
 hotdogs_data <- read.csv(file='Chevron_2021_Datathon_Challenge/Chevron_2021_Datathon_Challenge/filesForStartOfDatathon/training.csv')
 
-
 df_1_1 <- hotdogs_data %>% filter(StoreNumber==1000, X3HourBucket==1)
 df_1_2 <- hotdogs_data %>% filter(StoreNumber==1000, X3HourBucket==2)
 df_1_3 <- hotdogs_data %>% filter(StoreNumber==1000, X3HourBucket==3)
@@ -98,3 +97,8 @@ fcst_4$ypredict <- ceiling(fcst_4$yhat)
 
 plot(m_1_3,fcst_1_3, main="Store 1: Time Bucket 3 Sales", xlab = "Day of the Year", ylab = 'Gross Hotdog Sales', frame.plot = TRUE)
 prophet_plot_components(m_1_3, fcst_1_3)
+
+write.csv(fcst_1,"HotDogFcst1.csv", row.names = FALSE)
+write.csv(fcst_2,"HotDogFcst2.csv", row.names = FALSE)
+write.csv(fcst_3,"HotDogFcst3.csv", row.names = FALSE)
+write.csv(fcst_4,"HotDogFcst4.csv", row.names = FALSE)
